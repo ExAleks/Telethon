@@ -17,6 +17,7 @@
 - **Настройки** — универсальное хранилище `get_setting()` / `set_setting()`
 - **Сессии** — `StringSession` в БД, автоматическое восстановление
 - **Веб-панель** — Flask-админка: дашборд, авторизация, прокси, логи, настройки
+- **i18n** — интернационализация: ru/en, переключение языка в навбаре, JSON-переводы
 
 ### Быстрый старт
 
@@ -73,6 +74,7 @@ Telethon/
 ├── run.py         — интерактивное меню / веб
 ├── templates/     — HTML-шаблоны
 ├── static/        — CSS
+├── i18n/          — модуль перевода (ru/en JSON)
 └── .env.example   — шаблон переменных
 ```
 
@@ -91,6 +93,7 @@ Ready-to-use boilerplate for a Telegram client built on **Telethon**. Drop it in
 - **Settings** — universal key-value store `get_setting()` / `set_setting()`
 - **Sessions** — `StringSession` stored in DB, automatic recovery
 - **Web panel** — Flask admin: dashboard, auth, proxy, logs, settings
+- **i18n** — internationalization: ru/en, language switcher in navbar, JSON translations
 
 ### Quick start
 
@@ -147,6 +150,7 @@ Telethon/
 ├── run.py         — interactive menu / web
 ├── templates/     — HTML templates
 ├── static/        — CSS
+├── i18n/          — i18n module (ru/en JSON)
 └── .env.example   — env template
 ```
 
