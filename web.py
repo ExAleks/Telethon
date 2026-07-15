@@ -7,6 +7,8 @@ import time
 
 from flask import Flask, render_template, request, redirect, url_for, flash
 
+from i18n import I18n
+from i18n.flask_integration import I18nExtension
 from config import API_ID, API_HASH, PHONE, SOCKS5_HOST, SOCKS5_PORT, SOCKS5_USER, SOCKS5_PASSWORD
 from config import MTPROTO_SERVER, MTPROTO_PORT, MTPROTO_SECRET
 from database import init_db, get_config, update_config, get_setting, set_setting, add_log
@@ -17,6 +19,10 @@ from utils import is_admin
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24).hex()
+
+i18n = I18n(default='ru')
+i18n.load_dir(os.path.join(os.path.dirname(__file__), 'i18n', 'translations'))
+I18nExtension(i18n)(app)
 
 
 def _run(coro):
@@ -66,7 +72,7 @@ def auth_page():
             phone = cfg.get('phone') or PHONE
             code = request.form.get('code', '').strip()
             if not code:
-                flash('Введите код', 'error')
+                flash(i18n.t('auth.code_error'), 'error')
                 return redirect(url_for('auth_page'))
             ok, msg, status = _run(login(api_id, api_hash, phone, code=code))
             flash(msg, 'success' if ok else 'error')
@@ -80,7 +86,7 @@ def auth_page():
             phone = cfg.get('phone') or PHONE
             password = request.form.get('password', '').strip()
             if not password:
-                flash('Введите пароль 2FA', 'error')
+                flash(i18n.t('auth.password_error'), 'error')
                 return redirect(url_for('auth_page'))
             ok, msg, _ = _run(login(api_id, api_hash, phone, password=password))
             flash(msg, 'success' if ok else 'error')
@@ -89,7 +95,7 @@ def auth_page():
         if action == 'logout':
             update_config(api_id=None, api_hash=None, phone=None,
                           session_string=None, phone_code_hash=None, enabled=0)
-            flash('Выход выполнен', 'success')
+            flash(i18n.t('auth.logout'), 'success')
             return redirect(url_for('auth_page'))
 
         if action == 'qr_start':
@@ -102,13 +108,13 @@ def auth_page():
                 return redirect(url_for('auth_page'))
             token = qr_login(aid, ahash)
             set_setting('qr_token', token)
-            flash('QR-логин запущен', 'success')
+            flash(i18n.t('auth.qr_started'), 'success')
             return redirect(url_for('auth_page'))
 
         if action == 'qr_poll':
             token = get_setting('qr_token')
             if not token:
-                flash('Нет активного QR', 'error')
+                flash(i18n.t('auth.no_active_qr'), 'error')
                 return redirect(url_for('auth_page'))
             state = poll_qr(token)
             if state['status'] == 'done':
@@ -116,10 +122,10 @@ def auth_page():
                 if ss:
                     update_config(api_id=cfg.get('api_id'), api_hash=cfg.get('api_hash'),
                                   phone='QR', session_string=ss, phone_code_hash=None, enabled=1)
-                flash('QR-авторизация успешна!', 'success')
+                flash(i18n.t('auth.qr_success'), 'success')
                 return redirect(url_for('auth_page'))
             elif state['status'] == 'need_password':
-                flash('Требуется 2FA пароль', 'error')
+                flash(i18n.t('auth.need_2fa_password'), 'error')
             elif state['status'] == 'waiting':
                 flash(f'QR URL: {state.get("url", "")}', 'success')
             else:
@@ -146,7 +152,7 @@ def proxy_page():
         set_setting('mtproto_server', request.form.get('mtproto_server', '').strip())
         set_setting('mtproto_port', request.form.get('mtproto_port', '443').strip())
         set_setting('mtproto_secret', request.form.get('mtproto_secret', '').strip())
-        flash('Прокси сохранены', 'success')
+        flash(i18n.t('proxy.saved'), 'success')
         return redirect(url_for('proxy_page'))
 
     return render_template('proxy.html',
@@ -166,7 +172,7 @@ def proxy_page():
 def test_connection():
     cfg = get_config()
     if not cfg.get('session_string'):
-        flash('Сначала авторизуйтесь', 'error')
+        flash(i18n.t('test.auth_first'), 'error')
         return redirect(url_for('auth_page'))
 
     s5_host = get_setting('socks5_host', SOCKS5_HOST)
@@ -217,7 +223,7 @@ def settings_page():
     if request.method == 'POST':
         update_config(enabled=request.form.get('enabled') == '1')
         set_setting('admin_password', request.form.get('admin_password', '').strip())
-        flash('Настройки сохранены', 'success')
+        flash(i18n.t('settings.saved'), 'success')
         return redirect(url_for('settings_page'))
 
     cfg = get_config()

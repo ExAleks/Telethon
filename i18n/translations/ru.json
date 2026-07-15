@@ -1,0 +1,80 @@
+{
+    "_lang": "ru",
+    "nav": {
+        "brand": "Telethon",
+        "dashboard": "Дашборд",
+        "auth": "Авторизация",
+        "proxy": "Прокси",
+        "logs": "Логи",
+        "settings": "Настройки"
+    },
+    "dashboard": {
+        "title": "Дашборд",
+        "status": "Статус",
+        "authorized": "Авторизован",
+        "not_authorized": "Не авторизован",
+        "api": "API",
+        "no_value": "(нет)",
+        "socks5": "SOCKS5",
+        "mtproto": "MTProto",
+        "not_configured": "Не настроен",
+        "test_connection": "Тест подключения"
+    },
+    "auth": {
+        "title": "Авторизация",
+        "phone_code": "Телефон + код",
+        "api_id": "API ID",
+        "api_hash": "API Hash",
+        "phone": "+79991234567",
+        "send_code": "Отправить код",
+        "qr_login": "Запустить QR-ログин",
+        "code_sent": "Код отправлен на",
+        "code_placeholder": "Код из Telegram",
+        "confirm": "Подтвердить",
+        "need_2fa": "Если нужен 2FA:",
+        "password_2fa": "Пароль 2FA",
+        "login": "Войти",
+        "scan_qr": "Отсканируйте QR:",
+        "check_status": "Проверить статус",
+        "logged_in_as": "Авторизован как",
+        "logout": "Выйти",
+        "code_error": "Введите код",
+        "password_error": "Введите пароль 2FA",
+        "no_active_qr": "Нет активного QR",
+        "qr_started": "QR-логин запущен",
+        "qr_success": "QR-авторизация успешна!",
+        "need_2fa_password": "Требуется 2FA пароль"
+    },
+    "proxy": {
+        "title": "Прокси",
+        "socks5": "SOCKS5",
+        "mtproto": "MTProto",
+        "host": "Хост",
+        "port": "Порт",
+        "user": "Логин",
+        "password": "Пароль",
+        "server": "Сервер",
+        "secret": "Secret",
+        "saved": "Прокси сохранены",
+        "save": "Сохранить"
+    },
+    "logs": {
+        "title": "Логи",
+        "level": "Уровень",
+        "message": "Сообщение",
+        "time": "Время",
+        "empty": "Логов пока нет"
+    },
+    "settings": {
+        "title": "Настройки",
+        "parser": "Парсер",
+        "enabled": "Включён",
+        "security": "Безопасность",
+        "admin_password": "Пароль веб-панели",
+        "saved": "Настройки сохранены",
+        "save": "Сохранить"
+    },
+    "test": {
+        "auth_first": "Сначала авторизуйтесь"
+    }
+}

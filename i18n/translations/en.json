@@ -1,0 +1,80 @@
+{
+    "_lang": "en",
+    "nav": {
+        "brand": "Telethon",
+        "dashboard": "Dashboard",
+        "auth": "Authorization",
+        "proxy": "Proxy",
+        "logs": "Logs",
+        "settings": "Settings"
+    },
+    "dashboard": {
+        "title": "Dashboard",
+        "status": "Status",
+        "authorized": "Authorized",
+        "not_authorized": "Not authorized",
+        "api": "API",
+        "no_value": "(none)",
+        "socks5": "SOCKS5",
+        "mtproto": "MTProto",
+        "not_configured": "Not configured",
+        "test_connection": "Test connection"
+    },
+    "auth": {
+        "title": "Authorization",
+        "phone_code": "Phone + code",
+        "api_id": "API ID",
+        "api_hash": "API Hash",
+        "phone": "+79991234567",
+        "send_code": "Send code",
+        "qr_login": "Start QR login",
+        "code_sent": "Code sent to",
+        "code_placeholder": "Code from Telegram",
+        "confirm": "Confirm",
+        "need_2fa": "If 2FA is required:",
+        "password_2fa": "2FA password",
+        "login": "Log in",
+        "scan_qr": "Scan the QR:",
+        "check_status": "Check status",
+        "logged_in_as": "Logged in as",
+        "logout": "Log out",
+        "code_error": "Enter the code",
+        "password_error": "Enter 2FA password",
+        "no_active_qr": "No active QR",
+        "qr_started": "QR login started",
+        "qr_success": "QR login successful!",
+        "need_2fa_password": "2FA password required"
+    },
+    "proxy": {
+        "title": "Proxy",
+        "socks5": "SOCKS5",
+        "mtproto": "MTProto",
+        "host": "Host",
+        "port": "Port",
+        "user": "Username",
+        "password": "Password",
+        "server": "Server",
+        "secret": "Secret",
+        "saved": "Proxy settings saved",
+        "save": "Save"
+    },
+    "logs": {
+        "title": "Logs",
+        "level": "Level",
+        "message": "Message",
+        "time": "Time",
+        "empty": "No logs yet"
+    },
+    "settings": {
+        "title": "Settings",
+        "parser": "Parser",
+        "enabled": "Enabled",
+        "security": "Security",
+        "admin_password": "Web panel password",
+        "saved": "Settings saved",
+        "save": "Save"
+    },
+    "test": {
+        "auth_first": "Please authorize first"
+    }
+}

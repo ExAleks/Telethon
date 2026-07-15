@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{ current_lang }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +8,23 @@
 </head>
 <body>
     <nav>
-        <a href="/" class="brand">Telethon</a>
+        <a href="/" class="brand">{{ t('nav.brand') }}</a>
         <div class="nav-links">
-            <a href="/">Дашборд</a>
-            <a href="/auth">Авторизация</a>
-            <a href="/proxy">Прокси</a>
-            <a href="/logs">Логи</a>
-            <a href="/settings">Настройки</a>
+            <a href="/">{{ t('nav.dashboard') }}</a>
+            <a href="/auth">{{ t('nav.auth') }}</a>
+            <a href="/proxy">{{ t('nav.proxy') }}</a>
+            <a href="/logs">{{ t('nav.logs') }}</a>
+            <a href="/settings">{{ t('nav.settings') }}</a>
+        </div>
+        <div class="lang-switch">
+            {% for lang in langs %}
+            {% if lang != current_lang %}
+            <form method="post" style="display:inline">
+                <input type="hidden" name="lang" value="{{ lang }}">
+                <button type="submit" class="lang-btn">{{ lang|upper }}</button>
+            </form>
+            {% endif %}
+            {% endfor %}
         </div>
     </nav>
     <main>

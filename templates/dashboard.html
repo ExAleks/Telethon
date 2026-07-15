@@ -1,40 +1,40 @@
 {% extends "base.html" %}
-{% block title %}Дашборд — Telethon{% endblock %}
+{% block title %}{{ t('dashboard.title') }} — Telethon{% endblock %}
 {% block content %}
-<h1>Дашборд</h1>
+<h1>{{ t('dashboard.title') }}</h1>
 <div class="cards">
     <div class="card">
-        <h3>Статус</h3>
+        <h3>{{ t('dashboard.status') }}</h3>
         {% if authorized %}
-        <span class="badge ok">Авторизован</span>
+        <span class="badge ok">{{ t('dashboard.authorized') }}</span>
         <p>{{ config.phone or 'QR' }}</p>
         {% else %}
-        <span class="badge err">Не авторизован</span>
+        <span class="badge err">{{ t('dashboard.not_authorized') }}</span>
         {% endif %}
     </div>
     <div class="card">
-        <h3>API</h3>
-        <p>{{ config.api_id or '(нет)' }}</p>
+        <h3>{{ t('dashboard.api') }}</h3>
+        <p>{{ config.api_id or t('dashboard.no_value') }}</p>
     </div>
     <div class="card">
-        <h3>SOCKS5</h3>
+        <h3>{{ t('dashboard.socks5') }}</h3>
         {% if socks5_host %}
         <span class="badge ok">{{ socks5_host }}</span>
         {% else %}
-        <span class="badge">Не настроен</span>
+        <span class="badge">{{ t('dashboard.not_configured') }}</span>
         {% endif %}
     </div>
     <div class="card">
-        <h3>MTProto</h3>
+        <h3>{{ t('dashboard.mtproto') }}</h3>
         {% if mtproto_server %}
         <span class="badge ok">{{ mtproto_server }}</span>
         {% else %}
-        <span class="badge">Не настроен</span>
+        <span class="badge">{{ t('dashboard.not_configured') }}</span>
         {% endif %}
     </div>
 </div>
 <div class="actions">
-    <a href="/test" class="btn">Тест подключения</a>
-    <a href="/auth" class="btn">Авторизация</a>
+    <a href="/test" class="btn">{{ t('dashboard.test_connection') }}</a>
+    <a href="/auth" class="btn">{{ t('nav.auth') }}</a>
 </div>
 {% endblock %}

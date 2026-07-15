@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Логи — Telethon{% endblock %}
+{% block title %}{{ t('logs.title') }} — Telethon{% endblock %}
 {% block content %}
-<h1>Логи</h1>
+<h1>{{ t('logs.title') }}</h1>
 <div class="card">
     <table>
-        <thead><tr><th>Уровень</th><th>Сообщение</th><th>Время</th></tr></thead>
+        <thead><tr><th>{{ t('logs.level') }}</th><th>{{ t('logs.message') }}</th><th>{{ t('logs.time') }}</th></tr></thead>
         <tbody>
         {% for level, msg, ts in logs %}
         <tr>
@@ -14,7 +14,7 @@
         </tr>
         {% endfor %}
         {% if not logs %}
-        <tr><td colspan="3">Логов пока нет</td></tr>
+        <tr><td colspan="3">{{ t('logs.empty') }}</td></tr>
         {% endif %}
         </tbody>
     </table>

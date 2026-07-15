@@ -1,19 +1,19 @@
 {% extends "base.html" %}
-{% block title %}Настройки — Telethon{% endblock %}
+{% block title %}{{ t('settings.title') }} — Telethon{% endblock %}
 {% block content %}
-<h1>Настройки</h1>
+<h1>{{ t('settings.title') }}</h1>
 <form method="post">
     <div class="card">
-        <h3>Парсер</h3>
+        <h3>{{ t('settings.parser') }}</h3>
         <label>
             <input type="checkbox" name="enabled" value="1" {% if config.enabled %}checked{% endif %}>
-            Включён
+            {{ t('settings.enabled') }}
         </label>
     </div>
     <div class="card">
-        <h3>Безопасность</h3>
-        <label>Пароль веб-панели <input name="admin_password" value="{{ admin_password }}" type="password"></label>
+        <h3>{{ t('settings.security') }}</h3>
+        <label>{{ t('settings.admin_password') }} <input name="admin_password" value="{{ admin_password }}" type="password"></label>
     </div>
-    <button class="btn" type="submit">Сохранить</button>
+    <button class="btn" type="submit">{{ t('settings.save') }}</button>
 </form>
 {% endblock %}
