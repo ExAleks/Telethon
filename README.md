@@ -16,6 +16,7 @@
 - **Логи** — SQLite-таблица `logs`, функция `add_log()`
 - **Настройки** — универсальное хранилище `get_setting()` / `set_setting()`
 - **Сессии** — `StringSession` в БД, автоматическое восстановление
+- **Веб-панель** — Flask-админка: дашборд, авторизация, прокси, логи, настройки
 
 ### Быстрый старт
 
@@ -25,7 +26,9 @@ cd Telethon
 pip install -r requirements.txt
 cp .env.example .env
 # заполни API_ID, API_HASH, PHONE в .env
-python run.py
+python run.py              # интерактивное меню
+python run.py --web        # веб-панель на http://localhost:5000
+python run.py --web --port=8080  # свой порт
 ```
 
 ### Использование в коде
@@ -66,7 +69,10 @@ Telethon/
 ├── client.py      — TelethonClient с fallback
 ├── auth.py        — вход: телефон, QR, 2FA
 ├── utils.py       — is_admin(), парсинг ссылок
-├── run.py         — интерактивное меню
+├── web.py         — Flask веб-панель
+├── run.py         — интерактивное меню / веб
+├── templates/     — HTML-шаблоны
+├── static/        — CSS
 └── .env.example   — шаблон переменных
 ```
 
@@ -84,6 +90,7 @@ Ready-to-use boilerplate for a Telegram client built on **Telethon**. Drop it in
 - **Logging** — SQLite `logs` table, `add_log()` function
 - **Settings** — universal key-value store `get_setting()` / `set_setting()`
 - **Sessions** — `StringSession` stored in DB, automatic recovery
+- **Web panel** — Flask admin: dashboard, auth, proxy, logs, settings
 
 ### Quick start
 
@@ -93,7 +100,9 @@ cd Telethon
 pip install -r requirements.txt
 cp .env.example .env
 # fill in API_ID, API_HASH, PHONE in .env
-python run.py
+python run.py              # interactive menu
+python run.py --web        # web panel at http://localhost:5000
+python run.py --web --port=8080  # custom port
 ```
 
 ### Usage
@@ -134,7 +143,10 @@ Telethon/
 ├── client.py      — TelethonClient with fallback
 ├── auth.py        — login: phone, QR, 2FA
 ├── utils.py       — is_admin(), link parsing
-├── run.py         — interactive menu
+├── web.py         — Flask web panel
+├── run.py         — interactive menu / web
+├── templates/     — HTML templates
+├── static/        — CSS
 └── .env.example   — env template
 ```
 

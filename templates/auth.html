@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Авторизация — Telethon{% endblock %}
+{% block content %}
+<h1>Авторизация</h1>
+
+<div class="card">
+{% if authorized %}
+<p class="ok">Авторизован как <b>{{ config.phone }}</b></p>
+<form method="post"><input type="hidden" name="action" value="logout">
+    <button class="btn err">Выйти</button>
+</form>
+
+{% elif qr_state and qr_state.status == 'waiting' %}
+<p>Отсканируйте QR:</p>
+<code>{{ qr_state.url }}</code>
+<form method="post" style="margin-top:10px">
+    <input type="hidden" name="action" value="qr_poll">
+    <button class="btn">Проверить статус</button>
+</form>
+
+{% elif pending %}
+<p>Код отправлен на <b>{{ config.phone }}</b></p>
+<form method="post">
+    <input type="hidden" name="action" value="confirm_code">
+    <input name="code" placeholder="Код из Telegram" required>
+    <button class="btn">Подтвердить</button>
+</form>
+<hr>
+<p>Если нужен 2FA:</p>
+<form method="post">
+    <input type="hidden" name="action" value="confirm_2fa">
+    <input name="password" type="password" placeholder="Пароль 2FA">
+    <button class="btn">Войти</button>
+</form>
+
+{% else %}
+<form method="post">
+    <input name="api_id" placeholder="API ID" value="{{ config.api_id or '' }}">
+    <input name="api_hash" placeholder="API Hash" value="{{ config.api_hash or '' }}">
+    <input name="phone" placeholder="+79991234567" value="{{ config.phone or '' }}">
+    <div class="auth-btns">
+        <input type="hidden" name="action" value="send_code">
+        <button class="btn">Отправить код</button>
+    </div>
+</form>
+<form method="post" class="auth-qr">
+    <input type="hidden" name="action" value="qr_start">
+    <input type="hidden" name="api_id" value="{{ config.api_id or '' }}">
+    <input type="hidden" name="api_hash" value="{{ config.api_hash or '' }}">
+    <button class="btn secondary">Запустить QR-логин</button>
+</form>
+{% endif %}
+</div>
+{% endblock %}

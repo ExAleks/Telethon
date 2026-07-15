@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Логи — Telethon{% endblock %}
+{% block content %}
+<h1>Логи</h1>
+<div class="card">
+    <table>
+        <thead><tr><th>Уровень</th><th>Сообщение</th><th>Время</th></tr></thead>
+        <tbody>
+        {% for level, msg, ts in logs %}
+        <tr>
+            <td><span class="badge {% if level=='ERROR' %}err{% elif level=='WARNING' %}warn{% else %}ok{% endif %}">{{ level }}</span></td>
+            <td>{{ msg }}</td>
+            <td>{{ ts }}</td>
+        </tr>
+        {% endfor %}
+        {% if not logs %}
+        <tr><td colspan="3">Логов пока нет</td></tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

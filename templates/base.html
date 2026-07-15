@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Telethon{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="/" class="brand">Telethon</a>
+        <div class="nav-links">
+            <a href="/">Дашборд</a>
+            <a href="/auth">Авторизация</a>
+            <a href="/proxy">Прокси</a>
+            <a href="/logs">Логи</a>
+            <a href="/settings">Настройки</a>
+        </div>
+    </nav>
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for cat, msg in messages %}
+            <div class="flash {{ cat }}">{{ msg }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

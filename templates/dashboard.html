@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Дашборд — Telethon{% endblock %}
+{% block content %}
+<h1>Дашборд</h1>
+<div class="cards">
+    <div class="card">
+        <h3>Статус</h3>
+        {% if authorized %}
+        <span class="badge ok">Авторизован</span>
+        <p>{{ config.phone or 'QR' }}</p>
+        {% else %}
+        <span class="badge err">Не авторизован</span>
+        {% endif %}
+    </div>
+    <div class="card">
+        <h3>API</h3>
+        <p>{{ config.api_id or '(нет)' }}</p>
+    </div>
+    <div class="card">
+        <h3>SOCKS5</h3>
+        {% if socks5_host %}
+        <span class="badge ok">{{ socks5_host }}</span>
+        {% else %}
+        <span class="badge">Не настроен</span>
+        {% endif %}
+    </div>
+    <div class="card">
+        <h3>MTProto</h3>
+        {% if mtproto_server %}
+        <span class="badge ok">{{ mtproto_server }}</span>
+        {% else %}
+        <span class="badge">Не настроен</span>
+        {% endif %}
+    </div>
+</div>
+<div class="actions">
+    <a href="/test" class="btn">Тест подключения</a>
+    <a href="/auth" class="btn">Авторизация</a>
+</div>
+{% endblock %}

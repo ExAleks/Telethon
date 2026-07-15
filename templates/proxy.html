@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Прокси — Telethon{% endblock %}
+{% block content %}
+<h1>Прокси</h1>
+<form method="post">
+    <div class="card">
+        <h3>SOCKS5</h3>
+        <label>Хост <input name="socks5_host" value="{{ socks5_host }}"></label>
+        <label>Порт <input name="socks5_port" value="{{ socks5_port }}"></label>
+        <label>Логин <input name="socks5_user" value="{{ socks5_user }}"></label>
+        <label>Пароль <input name="socks5_password" type="password" value=""></label>
+    </div>
+    <div class="card">
+        <h3>MTProto</h3>
+        <label>Сервер <input name="mtproto_server" value="{{ mtproto_server }}"></label>
+        <label>Порт <input name="mtproto_port" value="{{ mtproto_port }}"></label>
+        <label>Secret <input name="mtproto_secret" value="{{ mtproto_secret }}"></label>
+    </div>
+    <button class="btn" type="submit">Сохранить</button>
+</form>
+{% endblock %}

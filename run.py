@@ -180,4 +180,13 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    import sys
+    if '--web' in sys.argv:
+        from web import run_web
+        port = 5000
+        for a in sys.argv:
+            if a.startswith('--port='):
+                port = int(a.split('=')[1])
+        run_web(port=port, debug='--debug' in sys.argv)
+    else:
+        main()
