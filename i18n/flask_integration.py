@@ -24,17 +24,12 @@ def I18nExtension(i18n_instance):
 
         @app.before_request
         def _set_lang():
-            if request.method == 'POST' and 'lang' in request.form:
-                lang = request.form['lang']
-                if lang in i18n_instance.langs():
-                    session['lang'] = lang
-                    i18n_instance.set_lang(lang)
-            elif 'lang' in session:
-                i18n_instance.set_lang(session['lang'])
-            elif request.args.get('lang') in i18n_instance.langs():
-                lang = request.args['lang']
+            lang = request.args.get('lang')
+            if lang and lang in i18n_instance.langs():
                 session['lang'] = lang
                 i18n_instance.set_lang(lang)
+            elif 'lang' in session:
+                i18n_instance.set_lang(session['lang'])
 
         @app.context_processor
         def _inject():

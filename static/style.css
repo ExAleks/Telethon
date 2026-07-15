@@ -39,5 +39,5 @@ hr{border:none;border-top:1px solid #30363d;margin:16px 0}
 .btn.secondary{background:#30363d;color:#c9d1d9}
 .btn.secondary:hover{background:#3d444d}
 .lang-switch{margin-left:auto;display:flex;gap:8px}
-.lang-btn{background:transparent;border:1px solid #30363d;color:#8b949e;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px}
-.lang-btn:hover{color:#f0f6fc;border-color:#58a6ff}
+.lang-btn{background:transparent;border:1px solid #30363d;color:#8b949e;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;display:inline-block;text-decoration:none}
+.lang-btn:hover{color:#f0f6fc;border-color:#58a6ff;text-decoration:none}

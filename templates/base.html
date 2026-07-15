@@ -19,10 +19,7 @@
         <div class="lang-switch">
             {% for lang in langs %}
             {% if lang != current_lang %}
-            <form method="post" style="display:inline">
-                <input type="hidden" name="lang" value="{{ lang }}">
-                <button type="submit" class="lang-btn">{{ lang|upper }}</button>
-            </form>
+            <a href="?lang={{ lang }}" class="lang-btn">{{ lang|upper }}</a>
             {% endif %}
             {% endfor %}
         </div>
