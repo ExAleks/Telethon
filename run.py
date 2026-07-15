@@ -2,7 +2,7 @@
 run.py — Интерактивное меню: авторизация, статус, быстрый старт.
 """
 from config import API_ID, API_HASH, PHONE
-from database import init_db, get_config, add_log
+from database import init_db, get_config, update_config, add_log
 from auth import login, qr_login, poll_qr, normalize_credentials
 from client import TelethonClient
 from proxy import socks5, mtproto

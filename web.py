@@ -3,7 +3,7 @@ web.py — Flask-веб-панель: дашборд, авторизация, п
 """
 import asyncio
 import os
-import time
+import hashlib
 
 from flask import Flask, render_template, request, redirect, url_for, flash
 
@@ -18,7 +18,14 @@ from proxy import socks5, mtproto
 from utils import is_admin
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24).hex()
+_secret_file = os.path.join(os.path.dirname(__file__), '.secret_key')
+if os.path.exists(_secret_file):
+    with open(_secret_file, 'r') as f:
+        app.secret_key = f.read().strip()
+else:
+    app.secret_key = os.urandom(24).hex()
+    with open(_secret_file, 'w') as f:
+        f.write(app.secret_key)
 
 i18n = I18n(default='ru')
 i18n.load_dir(os.path.join(os.path.dirname(__file__), 'i18n', 'translations'))
@@ -211,8 +218,10 @@ def test_connection():
 def logs_page():
     from database import _open
     conn = _open()
-    rows = conn.execute('SELECT level, message, created_at FROM logs ORDER BY id DESC LIMIT 100').fetchall()
-    conn.close()
+    try:
+        rows = conn.execute('SELECT level, message, created_at FROM logs ORDER BY id DESC LIMIT 100').fetchall()
+    finally:
+        conn.close()
     return render_template('logs.html', logs=rows)
 
 
@@ -231,7 +240,7 @@ def settings_page():
                            admin_password=get_setting('admin_password', ''))
 
 
-def run_web(host='0.0.0.0', port=5000, debug=False):
+def run_web(host='127.0.0.1', port=5000, debug=False):
     init_db()
     add_log('INFO', f'Веб-панель запущена: http://{host}:{port}')
     app.run(host=host, port=port, debug=debug)
