@@ -1,0 +1,47 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Byte-compile sources
+        run: python -m compileall -q . -x '/(\.git|sessions|data)/'
+
+      - name: Import modules
+        run: |
+          python -c "import config, utils, database, i18n; print('imports ok')"
+
+      - name: Translation files parse
+        run: |
+          python -c "
+          import json, pathlib
+          files = sorted(pathlib.Path('i18n/translations').glob('*.json'))
+          assert files, 'no translation files'
+          for f in files:
+              json.loads(f.read_text(encoding='utf-8'))
+              print('ok', f)
+          "
